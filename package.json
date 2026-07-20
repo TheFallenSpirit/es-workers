@@ -1,0 +1,36 @@
+{
+	"name": "es-workers",
+	"type": "module",
+	"main": "index.js",
+	"author": "Liam L <thefallenspirit@outlook.com>",
+	"license": "MPL-2.0",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"dev": "pnpm run build; pm2 flush && pm2 restart ecosystem.config.cjs --env development && pm2 logs",
+		"build": "clear; rm -rf build; tsc"
+	},
+	"devEngines": {
+		"packageManager": {
+			"name": "pnpm",
+			"version": "^11.7.0",
+			"onFail": "download"
+		}
+	},
+	"dependencies": {
+		"@hono/node-server": "^2.0.10",
+		"bullmq": "^5.80.6",
+		"cron": "^4.4.0",
+		"dayjs": "^1.11.21",
+		"dotenv": "^17.4.2",
+		"hono": "^4.12.30",
+		"ioredis": "^5.11.1",
+		"itty-time": "^2.0.2",
+		"mongoose": "^9.7.4",
+		"seyfert": "^5.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^26.1.1",
+		"typescript": "^7.0.2"
+	}
+}

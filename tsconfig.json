@@ -1,0 +1,17 @@
+{
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+        "types": ["node"],
+        "strict": true,
+        "module": "NodeNext",
+        "outDir": "build",
+        "rootDir": "./src/",
+        "skipLibCheck": true,
+        "noUnusedLocals": true,
+        "noErrorTruncation": true,
+        "noUnusedParameters": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noUncheckedIndexedAccess": true
+    }
+}
