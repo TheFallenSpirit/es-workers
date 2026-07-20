@@ -1,3 +1,6 @@
+// Partial ES Task Schema
+// This schema only provides fields required for these workers to operate properly.
+
 import { model, Schema } from 'mongoose';
 
 export interface TaskI {

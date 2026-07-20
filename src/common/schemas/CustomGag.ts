@@ -1,5 +1,5 @@
 // Partial ES CustomGag Schema
-// This schema only provides fields required for mongoose and JSON.parse() to operate properly.
+// This schema only provides fields required for these workers to operate properly.
 
 import { Schema, model } from 'mongoose';
 

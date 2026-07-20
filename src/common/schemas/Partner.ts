@@ -1,3 +1,6 @@
+// Partial ES Partner Schema
+// This schema only provides fields required for these workers to operate properly.
+
 import { model, Schema } from 'mongoose';
 
 type PartnerStatus = 'none' | 'active' | 'revoked' | 'applicationPending' | 'applicationDenied';

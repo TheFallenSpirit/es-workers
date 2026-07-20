@@ -1,3 +1,6 @@
+// Partial ES Guild Schema
+// This schema only provides fields required for these workers to operate properly.
+
 import { Schema, model } from 'mongoose';
 
 export interface GuildI {
