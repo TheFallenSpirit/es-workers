@@ -1,6 +1,6 @@
 import { CronOnCompleteCallback } from 'cron';
 import dayjs from 'dayjs';
-import { redis } from '../../store/index.js';
+import { redis } from '../../../store/index.js';
 
 export default async (done: CronOnCompleteCallback) => {
     const now = dayjs.utc();

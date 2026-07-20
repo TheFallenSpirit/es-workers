@@ -1,11 +1,11 @@
 import { CronOnCompleteCallback } from 'cron';
-import Partner, { PartnerI } from '../../common/schemas/Partner.js';
+import Partner, { PartnerI } from '../../../common/schemas/Partner.js';
 import { ChainableCommander } from 'ioredis';
-import rest from '../../common/rest.js';
-import { wait } from '../../common/index.js';
-import { redis } from '../../store/index.js';
+import rest from '../../../common/rest.js';
+import { wait } from '../../../common/index.js';
+import { redis } from '../../../store/index.js';
 import dayjs from 'dayjs';
-import { getGuild } from '../../store/guild.js';
+import { getGuild } from '../../../store/guild.js';
 
 export default async (done: CronOnCompleteCallback) => {
     let partners = await Partner.find({ status: 'active', 'discovery.public': true });

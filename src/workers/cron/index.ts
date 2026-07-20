@@ -1,12 +1,12 @@
 import { CronJob } from 'cron';
 import { extendDayjs, validateEnv } from '../../common/index.js';
-import clearImpairments from './clearImpairments.js';
-import clearSnipes from './clearSnipes.js';
-import startBedtimes from './startBedtimes.js';
-import updateDiscoveryCache from './updateDiscoveryCache.js';
-import warnDueTasks from './warnDueTasks.js';
-import updateDueTasks from './updateDueTasks.js';
-import updateRepeatingTasks from './updateRepeatingTasks.js';
+import clearImpairments from './jobs/clearImpairments.js';
+import clearSnipes from './jobs/clearSnipes.js';
+import startBedtimes from './jobs/startBedtimes.js';
+import updateDiscoveryCache from './jobs/updateDiscoveryCache.js';
+import warnDueTasks from './jobs/warnDueTasks.js';
+import updateDueTasks from './jobs/updateDueTasks.js';
+import updateRepeatingTasks from './jobs/updateRepeatingTasks.js';
 
 validateEnv();
 extendDayjs();

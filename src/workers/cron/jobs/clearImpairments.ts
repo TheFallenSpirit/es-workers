@@ -1,8 +1,8 @@
 import { CronOnCompleteCallback } from 'cron';
-import { redis } from '../../store/index.js';
+import { redis } from '../../../store/index.js';
 import dayjs from 'dayjs';
-import { GagI } from '../../common/schemas/CustomGag.js';
-import queueMessage from '../../common/queue.js';
+import { GagI } from '../../../common/schemas/CustomGag.js';
+import queueMessage from '../../../common/queue.js';
 
 export default async (done: CronOnCompleteCallback) => {
     const now = dayjs.utc();
