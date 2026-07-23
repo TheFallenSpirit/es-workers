@@ -10,7 +10,7 @@ export default async function messageJob(job: Job<MessageQueueItem, any, string>
 
     if (queue !== 'billing') {
         const isBlocked = await redis.exists(`es_dm_block:${job.data.userId}`);
-        if (isBlocked === 1) return;
+        if (isBlocked === 1) return (await job.remove()) ?? null;
 
         const profile = await getProfile(job.data.userId);
         if (job.data.notificationType && profile?.disabledNotifications?.includes(job.data.notificationType)) return;
@@ -24,7 +24,7 @@ export default async function messageJob(job: Job<MessageQueueItem, any, string>
         const dmChannel = await rest.users('@me').channels.post({ body: { recipient_id: job.data.userId } });
         channelId = dmChannel.id;
     } catch (_error) {
-        return;
+        return (await job.remove()) ?? null;
     };
 
     if (!redisChannelId) await redis.set(`es_dm_channel:${job.data.userId}`, channelId, 'EX', seconds('1 month'));
