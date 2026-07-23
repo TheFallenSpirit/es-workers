@@ -73,7 +73,7 @@ export default async (done: CronOnCompleteCallback) => {
         };
 
         const endDateTimestamp = endDate.unix();
-        lines.push(` Your bedtime will end at <t:${endDateTimestamp}:t> [<t:${endDateTimestamp}:R>]`);
+        lines.push(` Your bedtime will end at <t:${endDateTimestamp}:t> [<t:${endDateTimestamp}:R>].`);
         await queueMessage('general', { userId: profile.user, options: { content: lines.join('') } });
 
         pipeline.set(`es_bedtime:${profile.user}`, JSON.stringify({
