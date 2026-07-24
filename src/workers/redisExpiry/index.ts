@@ -1,8 +1,11 @@
 import bedtime from './keys/bedtime.js';
 import { validateEnv } from '../../common/index.js';
-import { redis } from '../../store/index.js';
+import { Redis } from 'ioredis';
 
 validateEnv();
+
+const redis = new Redis(process.env.REDIS_URL ?? '');
+await redis.config('SET', 'notify-keyspace-events', 'Ex');
 
 const channelName = `__keyevent@${redis.options.db}__:expired`;
 await redis.subscribe(channelName);

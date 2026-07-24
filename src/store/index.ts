@@ -8,12 +8,6 @@ export const redis = new Redis(
     { maxRetriesPerRequest: null }
 );
 
-await redis.config(
-    'SET',
-    'notify-keyspace-events',
-    'Ex'
-);
-
 export const generalMessageQueue = new Queue<MessageQueueItem, any, string>('general-message', {
     prefix: 'es_bullmq_queue',
     connection: redis
