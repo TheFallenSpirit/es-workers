@@ -7,7 +7,7 @@ import queueMessage from '../../../common/queue.js';
 export default async (done: CronOnCompleteCallback) => {
     const now = dayjs.utc();
     const pipeline = redis.pipeline();
-    const impairments = await redis.smembers(`es_impairments:${process.env.DISCORD_APP_ID}`);
+    const impairments = await redis.smembers('es_impairment_list');
     
     for await (const key of impairments) {
         const rawImpairment = await redis.get(key);
@@ -17,7 +17,7 @@ export default async (done: CronOnCompleteCallback) => {
         if (!impairment.expiresAt || !now.isSameOrAfter(impairment.expiresAt)) continue;
 
         pipeline.del(key);
-        pipeline.srem('es_impairments', key);
+        pipeline.srem('es_impairment_list', key);
 
         if (!impairment.noAlerts) {
             let location = 'globally';

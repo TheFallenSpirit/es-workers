@@ -88,8 +88,8 @@ export default async (done: CronOnCompleteCallback) => {
 };
 
 function setImpairment(userId: string, pipeline: ChainableCommander, opts: ImpairmentOptions) {
-    let key = `es_impairment${opts.expiresAt ? '_expr' : ''}:${opts.type}:${process.env.DISCORD_APP_ID}:${userId}:`;
+    let key = `es_impairment${opts.expiresAt ? '_expr' : ''}:${opts.type}:${userId}:`;
     key = key + `${opts.guildId ?? 'global'}:${opts.guildId && opts.channelId ? `${opts.channelId}` : 'all'}`;
     pipeline.set(key, JSON.stringify(opts));
-    pipeline.sadd(`es_impairments:${process.env.DISCORD_APP_ID}`, key);
+    pipeline.sadd('es_impairment_list', key);
 };
