@@ -8,6 +8,7 @@ export interface ProfileI {
     _id: number;
     user: string;
     bedtime?: ProfileBedtimeI;
+    permissionLevel?: number;
     disabledNotifications?: string[];
 }
 
@@ -15,6 +16,7 @@ const profileSchema = new Schema<ProfileI>({
     _id: { required: true, type: Number },
     user: { required: true, type: String },
     bedtime: { required: false, type: profileBedtimeSchema },
+    permissionLevel: { required: false, type: Number },
     disabledNotifications: { required: false, type: [String] }
 }, { _id: false, versionKey: false });
 

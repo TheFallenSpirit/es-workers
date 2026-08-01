@@ -1,17 +1,12 @@
-import { Worker, WorkerOptions } from 'bullmq';
-import { redis } from '../../store/index.js';
+import { Worker } from 'bullmq';
 import messageJob from './message.js';
 import { validateEnv } from '../../common/index.js';
+import { workerOptions } from '../../common/queue.js';
 
 validateEnv();
 
-const queueWorkerOptions: WorkerOptions = {
-    prefix: 'es_bullmq_queue',
-    connection: redis
-};
-
-const generalMessageWorker = new Worker('general-message', (job) => messageJob(job, 'general'), queueWorkerOptions);
-const billingMessageWorker = new Worker('billing-message', (job) => messageJob(job, 'billing'), queueWorkerOptions);
+const generalMessageWorker = new Worker('general-message', (job) => messageJob(job, 'general'), workerOptions);
+const billingMessageWorker = new Worker('billing-message', (job) => messageJob(job, 'billing'), workerOptions);
 
 console.log('Started listening to queue events');
 

@@ -8,7 +8,8 @@
 	"description": "",
 	"scripts": {
 		"dev": "pnpm run build; pm2 flush && pm2 restart ecosystem.config.cjs --env development && pm2 logs",
-		"build": "clear; rm -rf build; tsc"
+		"build": "clear; rm -rf build; tsc",
+		"dev:admin": "pnpm run build; node -r dotenv/config ./build/workers/admin/index.js --dev"
 	},
 	"devEngines": {
 		"packageManager": {
@@ -18,6 +19,7 @@
 		}
 	},
 	"dependencies": {
+		"@fallencodes/seyfert-utils": "^1.8.1",
 		"@hono/node-server": "^2.0.10",
 		"bullmq": "^5.80.6",
 		"cron": "^4.4.0",
@@ -27,7 +29,8 @@
 		"ioredis": "^5.11.1",
 		"itty-time": "^2.0.2",
 		"mongoose": "^9.7.4",
-		"seyfert": "^5.0.0"
+		"seyfert": "^5.0.0",
+		"yunaforseyfert": "^1.2.3"
 	},
 	"devDependencies": {
 		"@types/node": "^26.1.1",
