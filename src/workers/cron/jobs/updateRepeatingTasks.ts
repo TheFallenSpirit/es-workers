@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import Task from '../../../common/schemas/Task.js';
 import queueMessage from '../../../common/queue.js';
 import { updateTask } from '../../../store/task.js';
+import emojis from '../../../common/emojis.js';
 
 export default async (done: CronOnCompleteCallback) => {
     const now = dayjs.utc().startOf('day');
@@ -14,19 +15,20 @@ export default async (done: CronOnCompleteCallback) => {
     }).lean();
 
     for await (const task of tasks) {
+        const emoji = task.completedAt ? emojis.success : emojis.error;
         const completed = task.completedAt ? 'completed successfully' : 'not completed';
         const repeatSchedule = `It will repeat ${taskRepeat(task.repeat!)}`;
 
         if (task.assignedBy) await queueMessage('general', {
             userId: task.assignedBy,
             options: {
-                content: `Task #${task.fId} (${task.name}) for <@${task.user}> was ${completed}. ${repeatSchedule}`
+                content: `${emoji} Task #${task.fId} (${task.name}) for <@${task.user}> was ${completed}. ${repeatSchedule}`
             }
         });
 
         await queueMessage('general', {
             userId: task.user,
-            options: { content: `Task #${task.fId} (${task.name}) was ${completed}. ${repeatSchedule}` }
+            options: { content: `${emoji} Task #${task.fId} (${task.name}) was ${completed}. ${repeatSchedule}` }
         });
 
         await updateTask(task._id, {
