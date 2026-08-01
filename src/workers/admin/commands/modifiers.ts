@@ -25,8 +25,8 @@ const options = {
 };
 
 @Declare({
-    name: 'modifiers',
-    aliases: ['limits'],
+    name: 'limits',
+    aliases: ['modifiers'],
     description: `Update a user's limit modifiers.`,
     props: { permissionLevel: 7 }
 })

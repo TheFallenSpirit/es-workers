@@ -1,2 +1,5 @@
 allowBuilds:
   msgpackr-extract: set this to true or false
+
+minimumReleaseAgeExclude:
+  - '@fallencodes/seyfert-utils'
