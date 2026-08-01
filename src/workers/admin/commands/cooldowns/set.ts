@@ -21,6 +21,7 @@ const options = {
 
 @Declare({
     name: 'set',
+    aliases: ['s'],
     description: 'Set a new interaction cooldown for a user.'
 })
 

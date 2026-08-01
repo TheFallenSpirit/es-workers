@@ -10,6 +10,7 @@ const options = {
 
 @Declare({
     name: 'clear',
+    aliases: ['c'],
     description: `Clear all of a user's interaction cooldowns.`,
     props: { permissionLevel: 5 }
 })
