@@ -14,6 +14,7 @@ const options = {
             { name: 'Owners', value: 'owners' },
             { name: 'Trusted Users', value: 'authUsers' },
             { name: 'Rules', value: 'rules' },
+            { name: 'Shockers', value: 'shockers' },
             { name: 'Custom Gags', value: 'customGags' },
             { name: 'Custom Gag Rules', value: 'customGagRules' }
         ]
