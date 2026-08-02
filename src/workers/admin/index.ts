@@ -21,6 +21,7 @@ export const client = new Client({
         prefix: () => [dev ? '.est' : '.es'],
         defaults: { onAfterRun, onOptionsError }
     },
+    allowedMentions: { parse: [], replied_user: true },
     globalMiddlewares: ['permissions']
 });
 
