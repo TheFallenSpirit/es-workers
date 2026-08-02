@@ -7,15 +7,15 @@ import { duration } from 'itty-time';
 const options = {
     user: createUserOption({
         required: true,
-        description: ''
+        description: 'The user to set the cooldown for.'
     }),
     key: createStringOption({
         required: true,
-        description: ''
+        description: 'The redis key of the cooldown.'
     }),
     duration: createStringOption({
         required: true,
-        description: ''
+        description: 'The duration of the cooldown.'
     })
 };
 

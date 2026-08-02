@@ -2,11 +2,11 @@ import { CommandContext, createStringOption, Declare, Options, SubCommand } from
 import { redis } from '../../../../store/index.js';
 
 const options = {
-    guild: createStringOption({
+    'guild-id': createStringOption({
         required: true,
         min_length: 17,
         max_length: 19,
-        description: ''
+        description: 'The guild ID to clear cached data from.'
     })
 };
 
@@ -20,7 +20,7 @@ const options = {
 
 export default class extends SubCommand {
     run = async (context: CommandContext<typeof options>) => {
-        const guildId = context.options.guild;
+        const guildId = context.options['guild-id'];
         const guild = await context.client.guilds.fetch(guildId).catch(() => undefined);
 
         if (!guild) {

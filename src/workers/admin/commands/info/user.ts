@@ -6,11 +6,11 @@ import dayjs from 'dayjs';
 
 const options = {
     user: createUserOption({
-        description: ''
+        description: 'The user you want to view info of.'
     }),
     raw: createBooleanOption({
         flag: true,
-        description: ''
+        description: 'If raw JSON files of associated data should be returned.'
     })
 };
 

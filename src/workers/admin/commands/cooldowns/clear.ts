@@ -4,7 +4,7 @@ import { redis } from '../../../../store/index.js';
 const options = {
     user: createUserOption({
         required: false,
-        description: ''
+        description: 'The user to clear cooldowns for.'
     })
 };
 

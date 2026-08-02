@@ -9,11 +9,11 @@ const options = {
     'guild-id': createStringOption({
         min_length: 17,
         max_length: 19,
-        description: ''
+        description: 'The guild ID you want to view info of.'
     }),
     raw: createBooleanOption({
         flag: true,
-        description: ''
+        description: 'If raw JSON files of associated data should be returned.'
     })
 };
 

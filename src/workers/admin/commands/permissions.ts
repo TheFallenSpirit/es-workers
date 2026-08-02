@@ -4,13 +4,13 @@ import { getProfile, updateProfile } from '../../../store/profile.js';
 const options = {
     user: createUserOption({
         required: true,
-        description: ''
+        description: 'The user to update the permission level of.'
     }),
     level: createNumberOption({
         required: true,
         min_value: 0,
         max_value: 8,
-        description: ''
+        description: 'The new permission level.'
     })
 };
 

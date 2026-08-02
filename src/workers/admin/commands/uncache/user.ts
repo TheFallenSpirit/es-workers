@@ -4,7 +4,7 @@ import { redis } from '../../../../store/index.js';
 const options = {
     user: createUserOption({
         required: true,
-        description: ''
+        description: 'The user to clear cached data from.'
     })
 };
 
