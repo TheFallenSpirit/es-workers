@@ -4,11 +4,11 @@ import { getProfile, updateProfile } from '../../../store/profile.js';
 const options = {
     user: createUserOption({
         required: true,
-        description: ''
+        description: 'The user to update the limits of'
     }),
     limit: createStringOption({
         required: true,
-        description: '',
+        description: 'The limit modifier to update.',
         choices: [
             { name: 'Subs', value: 'subs' },
             { name: 'Owners', value: 'owners' },
@@ -21,7 +21,7 @@ const options = {
     }),
     modifier: createIntegerOption({
         required: true,
-        description: ''
+        description: 'The new limit modifier (0 for clear).'
     })
 };
 
