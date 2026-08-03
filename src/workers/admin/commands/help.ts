@@ -51,7 +51,7 @@ export default class extends Command {
             if (options && options.length > 0) lines.push(
                 `### Options`,
                 ...options.map(({ flag, name, required, description }) => {
-                    return `\n- ${flag ? '--' : ''}${name}${required ? '*' : ''} - ${description}`;
+                    return `\n- ${flag ? '--' : ''}**${name}**${required ? '\\*' : ''} - ${description}`;
                 }),
                 `\n`
             );
@@ -60,19 +60,33 @@ export default class extends Command {
             if (subCommands && subCommands.length > 0) lines.push(`### Sub Commands`);
 
             for (const subCommand of subCommands ?? []) {
-                const subLines = [`\n- \`${prefix} ${command.name} ${subCommand.name}\``];
+                const subLines = [`\n- \`${prefix} ${command.name} ${subCommand.name}\` - ${subCommand.description}`];
 
                 if (subCommand.options && subCommand.options.length > 0) subLines.push(
                     ...subCommand.options.map(({ flag, name, required, description }) => {
-                        return `\n  - ${flag ? '--' : ''}${name}${required ? '*' : ''} - ${description}`;
+                        return `\n  - ${flag ? '--' : ''}**${name}**${required ? '\\*' : ''} - ${description}`;
                     })
                 );
 
                 lines.push(subLines.join(''));
             };
 
-            const container = createContainer([createTextDisplay(lines.join(''))]);
-            return context.editOrReply({ flags: MessageFlags.IsComponentsV2, components: [container] });
+            const footerLines = [
+                `Options suffixed with \`*\` are required. `,
+                `Options prefixed with \`--\` need to be typed with the \`--\` `,
+                `before their names, or they won't be recognized.`
+            ];
+
+            const container = createContainer([
+                createTextDisplay(lines.join('')),
+                createSeparator(),
+                createTextDisplay(footerLines.join(''))
+            ]);
+
+            return context.editOrReply({
+                flags: MessageFlags.IsComponentsV2,
+                components: [container]
+            });
         };
 
         const commands = clientCommands.filter(({ props }) => {
