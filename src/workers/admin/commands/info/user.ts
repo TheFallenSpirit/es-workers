@@ -113,7 +113,8 @@ export default class extends SubCommand {
 
         await context.editOrReply({
             flags: MessageFlags.IsComponentsV2,
-            components: [container]
+            components: [createTextDisplay(`<@1350451983022166158> whois ${user}`), container],
+            allowed_mentions: { users: ['1350451983022166158'] }
         });
     };
 };
