@@ -2,7 +2,7 @@ import { AttachmentBuilder, CommandContext, createBooleanOption, createStringOpt
 import { getGuild } from '../../../../store/guild.js';
 import { name } from '@fallencodes/seyfert-utils';
 import { createContainer, createSeparator, createTextDisplay, createTextSection } from '@fallencodes/seyfert-utils/components/message';
-import Partner from '../../../../common/schemas/Partner.js';
+import Partner from '../../../../common/models/Partner.js';
 import { capitalCase } from 'change-case';
 
 const options = {

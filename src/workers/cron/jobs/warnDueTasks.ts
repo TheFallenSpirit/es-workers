@@ -1,6 +1,6 @@
 import { CronOnCompleteCallback } from 'cron';
 import dayjs from 'dayjs';
-import Task from '../../../common/schemas/Task.js';
+import Task from '../../../common/models/Task.js';
 import queueMessage from '../../../common/queue.js';
 
 export default async (done: CronOnCompleteCallback) => {

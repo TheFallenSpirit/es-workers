@@ -1,5 +1,5 @@
 import { CronOnCompleteCallback } from 'cron';
-import Partner, { PartnerI } from '../../../common/schemas/Partner.js';
+import Partner, { PartnerI } from '../../../common/models/Partner.js';
 import { ChainableCommander } from 'ioredis';
 import rest from '../../../common/rest.js';
 import { wait } from '../../../common/index.js';

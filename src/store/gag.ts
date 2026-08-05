@@ -1,5 +1,5 @@
 import { seconds } from 'itty-time';
-import CustomGag, { GagI } from '../common/schemas/CustomGag.js';
+import CustomGag, { GagI } from '../common/models/CustomGag.js';
 import { redis, replacer, reviver } from './index.js';
 
 export async function getCustomGag(gagId: string): Promise<GagI | undefined> {

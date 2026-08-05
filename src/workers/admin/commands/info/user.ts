@@ -1,7 +1,7 @@
 import { AttachmentBuilder, CommandContext, createBooleanOption, createUserOption, Declare, GuildMember, MessageFlags, Options, SubCommand } from 'seyfert';
 import { getProfile } from '../../../../store/profile.js';
 import { createContainer, createSeparator, createTextDisplay, createTextSection } from '@fallencodes/seyfert-utils/components/message';
-import Safety from '../../../../common/schemas/Safety.js';
+import Safety from '../../../../common/models/Safety.js';
 import dayjs from 'dayjs';
 
 const options = {

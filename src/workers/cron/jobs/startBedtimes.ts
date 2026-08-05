@@ -1,10 +1,10 @@
 import { CronOnCompleteCallback } from 'cron';
 import { ChainableCommander } from 'ioredis';
 import { redis } from '../../../store/index.js';
-import Profile from '../../../common/schemas/Profile.js';
+import Profile from '../../../common/models/Profile.js';
 import dayjs from 'dayjs';
-import { BedtimeDay } from '../../../common/schemas/profile/Bedtime.js';
-import { GagI } from '../../../common/schemas/CustomGag.js';
+import { BedtimeDay } from '../../../common/models/profile/Bedtime.js';
+import { GagI } from '../../../common/models/CustomGag.js';
 import { getCustomGag } from '../../../store/gag.js';
 import queueMessage from '../../../common/queue.js';
 import { ImpairmentOptions } from './clearImpairments.js';

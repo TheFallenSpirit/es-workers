@@ -1,5 +1,5 @@
 import { UpdateQuery } from 'mongoose';
-import Task, { TaskI } from '../common/schemas/Task.js';
+import Task, { TaskI } from '../common/models/Task.js';
 import { redis, replacer } from './index.js';
 import { seconds } from 'itty-time';
 

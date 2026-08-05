@@ -1,5 +1,5 @@
 import { UpdateQuery } from 'mongoose';
-import Profile, { ProfileI } from '../common/schemas/Profile.js';
+import Profile, { ProfileI } from '../common/models/Profile.js';
 import { redis, reviver } from './index.js';
 
 export async function getProfile(userId: string): Promise<ProfileI | undefined> {

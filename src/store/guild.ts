@@ -1,4 +1,4 @@
-import Guild, { GuildI } from '../common/schemas/Guild.js';
+import Guild, { GuildI } from '../common/models/Guild.js';
 import { redis, reviver } from './index.js';
 
 export async function getGuild(guildId: string): Promise<GuildI | undefined> {
