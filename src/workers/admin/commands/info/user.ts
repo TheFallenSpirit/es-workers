@@ -1,7 +1,7 @@
 import { AttachmentBuilder, CommandContext, createBooleanOption, createUserOption, Declare, GuildMember, MessageFlags, Options, SubCommand } from 'seyfert';
 import { getProfile } from '../../../../store/profile.js';
 import { createContainer, createSeparator, createTextDisplay, createTextSection } from '@fallencodes/seyfert-utils/components/message';
-import Safety from '../../../../common/models/Safety.js';
+import Safety, { InfractionI } from '../../../../common/models/Safety.js';
 import dayjs from 'dayjs';
 
 const options = {
@@ -81,22 +81,26 @@ export default class extends SubCommand {
         const safetyProfile = await Safety.findById(user.id);
 
         if (safetyProfile) {
-            const infractions = [
-                ...safetyProfile.flags.values().map((infraction) => ({ type: 'flag', ...infraction })),
-                ...safetyProfile.restrictions.values().map((infraction) => ({ type: 'blacklist', ...infraction }))
-            ];
+            const infractions: InfractionWithIdAndType[] = [];
+            for (const [id, infraction] of safetyProfile.restrictions?.entries() ?? []) {
+                infractions.push({ _id: id, type: 'blacklist', ...infraction });
+            };
 
-            for await (const impairment of infractions) {
+            for (const [id, infraction] of safetyProfile.flags?.entries() ?? []) {
+                infractions.push({ _id: id, type: 'flag', ...infraction });
+            };
+
+            for await (const infraction of infractions) {
                 const issuer = await context.client.users.fetch(
-                    impairment.issuedBy
+                    infraction.issuedBy
                 ).catch(() => undefined);
 
                 safetyLines.push(
-                    `\n- ${impairment._id} ${impairment.type.toUpperCase()} `,
-                    `[<t:${dayjs.utc(impairment.issuedAt).unix()}:s>] - ${impairment.reason}`,
-                    `\n  - Issued by: @${issuer?.username ?? 'unknown'} [\`${impairment.issuedBy}\`] `,
-                    `// ${impairment.authority} [${impairment.guildId ? `\`${impairment.guildId}\`` : 'Unknown Guild'}]`,
-                    `\n  - Evidence: ${impairment.evidence.map((url, index) => `[Attachment ${index + 1}](${url})`).join(', ')}`
+                    `\n- ${infraction._id} ${infraction.type.toUpperCase()} `,
+                    `[<t:${dayjs.utc(infraction.issuedAt).unix()}:s>] - ${infraction.reason}`,
+                    `\n  - Issued by: @${issuer?.username ?? 'unknown'} [\`${infraction.issuedBy}\`] `,
+                    `// ${infraction.authority} [${infraction.guildId ? `\`${infraction.guildId}\`` : 'Unknown Guild'}]`,
+                    `\n  - Evidence: ${infraction.evidence.map((url, index) => `[Attachment ${index + 1}](${url})`).join(', ')}`
                 );
             };
         } else safetyLines.push(
@@ -118,3 +122,8 @@ export default class extends SubCommand {
         });
     };
 };
+
+interface InfractionWithIdAndType extends InfractionI {
+    _id: string;
+    type: string;
+}

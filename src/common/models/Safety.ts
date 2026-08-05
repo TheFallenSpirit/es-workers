@@ -1,24 +1,21 @@
 import { Schema, model } from 'mongoose';
 
-interface InfractionI {
-    _id: string;
+export interface InfractionI {
     reason: string;
+    guildId?: string;
     issuedAt: Date;
     issuedBy: string;
-    authority: string;
     evidence: string[];
-    guildId?: string;
+    authority: string;
 }
 
 interface SafetyProfileI {
     _id: string;
-    warns: InfractionI[];
-    flags: Map<string, InfractionI>;
-    restrictions: Map<string, InfractionI>;
+    flags?: Map<string, InfractionI>;
+    restrictions?: Map<string, InfractionI>;
 };
 
 const infraction = new Schema<InfractionI>({
-    _id: { required: true, type: String },
     reason: { required: true, type: String },
     guildId: { required: false, type: String },
     issuedAt: { required: true, type: Date },
@@ -29,9 +26,8 @@ const infraction = new Schema<InfractionI>({
 
 const safetyProfileSchema = new Schema<SafetyProfileI>({
     _id: { required: true, type: String },
-    warns: { required: true, type: [infraction], default: [] },
-    flags: { required: true, type: Map, of: infraction, default: new Map() },
-    restrictions: { required: true, type: Map, of: infraction, default: new Map() }
-}, { _id: false, versionKey: false, timestamps: true });
+    flags: { required: false, type: Map, of: infraction },
+    restrictions: { required: false, type: Map, of: infraction }
+}, { _id: false, versionKey: false });
 
 export default model('safetyProfiles', safetyProfileSchema);
