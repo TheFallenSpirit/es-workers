@@ -17,6 +17,9 @@ export interface PartnerI {
         public: boolean;
         description?: string;
     };
+    application?: {
+        userId?: string;
+    }
 }
 
 const partnerSchema = new Schema<PartnerI>({
@@ -29,6 +32,9 @@ const partnerSchema = new Schema<PartnerI>({
         tags: { required: true, type: [String], default: [] },
         public: { required: true, type: Boolean, default: false },
         description: { required: false, type: String }
+    },
+    application: {
+        userId: { required: false, type: String }
     }
 }, { _id: false, versionKey: false });
 

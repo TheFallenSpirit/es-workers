@@ -47,7 +47,7 @@ export const addToDiscovery = async (partner: PartnerI) => {
     await pipeline.exec();
 };
 
-async function removeFromDiscovery(partner: PartnerI, pipeline: ChainableCommander) {
+export async function removeFromDiscovery(partner: PartnerI, pipeline: ChainableCommander) {
     const key = `es_discovery:${partner._id}`;
     pipeline.del(key);
     pipeline.srem(`es_discovery_list`, key);

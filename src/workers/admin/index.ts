@@ -7,7 +7,7 @@ import { GatewayDispatchEvents, GatewayDispatchPayload } from 'seyfert';
 import middlewares from './middlewares/index.js';
 import plugins from './plugins.js';
 import dayjs from 'dayjs';
-import { onAfterRun, onOptionsError } from './defaults.js';
+import { onAfterRun, onOptionsError } from './common.js';
 
 validateEnv();
 extendDayjs();
