@@ -96,11 +96,13 @@ export default class extends SubCommand {
                 ).catch(() => undefined);
 
                 safetyLines.push(
-                    `\n- ${infraction._id} ${infraction.type.toUpperCase()} `,
-                    `[<t:${dayjs.utc(infraction.issuedAt).unix()}:s>] - ${infraction.reason}`,
+                    `\n- ${infraction._id.toUpperCase()} ${infraction.type.toUpperCase()} // `,
+                    `<t:${dayjs.utc(infraction.issuedAt).unix()}:s> // `,
+                    `${infraction.authority} [${infraction.guildId ? `\`${infraction.guildId}\`` : 'Unknown Guild'}]`,
+                    `\n  - Reason: ${infraction.reason}`,
                     `\n  - Evidence: ${infraction.evidence.map((url, index) => `[Attachment ${index + 1}](${url})`).join(', ')}`,
                     `\n  - Issued by: @${issuer?.username ?? 'unknown'} [\`${infraction.issuedBy}\`] `,
-                    `\n  - Authority: ${infraction.authority} [${infraction.guildId ? `\`${infraction.guildId}\`` : 'Unknown Guild'}]`
+                    // `\n  - Authority: ${infraction.authority} `
                 );
             };
         } else safetyLines.push(
