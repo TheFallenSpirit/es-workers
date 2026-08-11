@@ -4,6 +4,7 @@
         "cooldowns",
         "elem",
         "fallencodes",
+        "followup",
         "guildctl",
         "itty",
         "keyevent",

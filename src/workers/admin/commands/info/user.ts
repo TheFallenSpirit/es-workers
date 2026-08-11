@@ -119,8 +119,12 @@ export default class extends SubCommand {
 
         await context.editOrReply({
             flags: MessageFlags.IsComponentsV2,
-            components: [createTextDisplay(`<@1350451983022166158> whois ${user}`), container],
+            components: [container],
             allowed_mentions: { users: ['1350451983022166158'] }
+        });
+
+        await context.followup({
+            content: `<@1350451983022166158> whois ${user}`
         });
     };
 };
