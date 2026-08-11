@@ -78,15 +78,15 @@ export default class extends SubCommand {
         );
 
         const safetyLines = [`### Safety Flags & Restrictions`];
-        const safetyProfile = await Safety.findById(user.id);
+        const safetyProfile = await Safety.findById(user.id).lean();
 
         if (safetyProfile) {
             const infractions: InfractionWithIdAndType[] = [];
-            for (const [id, infraction] of safetyProfile.restrictions?.entries() ?? []) {
+            for (const [id, infraction] of Object.entries(safetyProfile.restrictions ?? {})) {
                 infractions.push({ _id: id, type: 'blacklist', ...infraction });
             };
 
-            for (const [id, infraction] of safetyProfile.flags?.entries() ?? []) {
+            for (const [id, infraction] of Object.entries(safetyProfile.flags ?? {})) {
                 infractions.push({ _id: id, type: 'flag', ...infraction });
             };
 
@@ -98,9 +98,9 @@ export default class extends SubCommand {
                 safetyLines.push(
                     `\n- ${infraction._id} ${infraction.type.toUpperCase()} `,
                     `[<t:${dayjs.utc(infraction.issuedAt).unix()}:s>] - ${infraction.reason}`,
+                    `\n  - Evidence: ${infraction.evidence.map((url, index) => `[Attachment ${index + 1}](${url})`).join(', ')}`,
                     `\n  - Issued by: @${issuer?.username ?? 'unknown'} [\`${infraction.issuedBy}\`] `,
-                    `// ${infraction.authority} [${infraction.guildId ? `\`${infraction.guildId}\`` : 'Unknown Guild'}]`,
-                    `\n  - Evidence: ${infraction.evidence.map((url, index) => `[Attachment ${index + 1}](${url})`).join(', ')}`
+                    `\n  - Authority: ${infraction.authority} [${infraction.guildId ? `\`${infraction.guildId}\`` : 'Unknown Guild'}]`
                 );
             };
         } else safetyLines.push(
