@@ -1,5 +1,11 @@
-import { billingMessageQueue, generalMessageQueue } from '../store/index.js';
+import { billingMessageQueue, generalMessageQueue, redis } from '../store/index.js';
 import { MessageQueueItem } from './types.js';
+import { WorkerOptions } from 'bullmq';
+
+export const workerOptions: WorkerOptions = {
+    prefix: 'es_bullmq_queue',
+    connection: redis
+};
 
 export default async function queueMessage(type: 'general' | 'billing', data: MessageQueueItem) {
     switch (type) {

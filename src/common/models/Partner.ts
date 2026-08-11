@@ -10,21 +10,31 @@ export interface PartnerI {
     status: PartnerStatus;
     updatedAt: Date;
     inviteCode?: string;
+    friendlyName?: string;
+    representativeId?: string;
     discovery: {
         tags: string[];
         public: boolean;
         description?: string;
     };
+    application?: {
+        userId?: string;
+    }
 }
 
 const partnerSchema = new Schema<PartnerI>({
     _id: { required: true, type: String },
     status: { required: true, type: String, default: 'none' },
     inviteCode: { required: false, type: String },
+    friendlyName: { required: false, type: String },
+    representativeId: { required: false, type: String },
     discovery: {
         tags: { required: true, type: [String], default: [] },
         public: { required: true, type: Boolean, default: false },
         description: { required: false, type: String }
+    },
+    application: {
+        userId: { required: false, type: String }
     }
 }, { _id: false, versionKey: false });
 

@@ -1,5 +1,5 @@
 import { CronOnCompleteCallback } from 'cron';
-import Partner, { PartnerI } from '../../../common/schemas/Partner.js';
+import Partner, { PartnerI } from '../../../common/models/Partner.js';
 import { ChainableCommander } from 'ioredis';
 import rest from '../../../common/rest.js';
 import { wait } from '../../../common/index.js';
@@ -47,7 +47,7 @@ export const addToDiscovery = async (partner: PartnerI) => {
     await pipeline.exec();
 };
 
-async function removeFromDiscovery(partner: PartnerI, pipeline: ChainableCommander) {
+export async function removeFromDiscovery(partner: PartnerI, pipeline: ChainableCommander) {
     const key = `es_discovery:${partner._id}`;
     pipeline.del(key);
     pipeline.srem(`es_discovery_list`, key);

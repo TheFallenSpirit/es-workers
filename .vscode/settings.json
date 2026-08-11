@@ -1,7 +1,10 @@
 {
     "cSpell.words": [
         "bullmq",
+        "cooldowns",
         "elem",
+        "fallencodes",
+        "guildctl",
         "itty",
         "keyevent",
         "leasher",
@@ -9,6 +12,8 @@
         "lrem",
         "roleplay",
         "smembers",
-        "srem"
+        "srem",
+        "Yuna",
+        "yunaforseyfert"
     ]
 }

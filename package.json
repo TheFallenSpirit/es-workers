@@ -8,29 +8,34 @@
 	"description": "",
 	"scripts": {
 		"dev": "pnpm run build; pm2 flush && pm2 restart ecosystem.config.cjs --env development && pm2 logs",
-		"build": "clear; rm -rf build; tsc"
+		"build": "clear; rm -rf build; tsc",
+		"dev:admin": "pnpm run build; node -r dotenv/config ./build/workers/admin/index.js --dev"
 	},
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
-			"version": "^11.7.0",
+			"version": "^11.18.0",
 			"onFail": "download"
 		}
 	},
 	"dependencies": {
-		"@hono/node-server": "^2.0.10",
-		"bullmq": "^5.80.6",
+		"@fallencodes/seyfert-utils": "^1.8.1",
+		"@hono/node-server": "^2.0.12",
+		"bullmq": "^5.81.3",
+		"change-case": "^5.4.4",
 		"cron": "^4.4.0",
 		"dayjs": "^1.11.21",
 		"dotenv": "^17.4.2",
-		"hono": "^4.12.30",
+		"hono": "^4.12.33",
 		"ioredis": "^5.11.1",
 		"itty-time": "^2.0.2",
-		"mongoose": "^9.7.4",
-		"seyfert": "^5.0.0"
+		"mongoose": "^9.9.1",
+		"parse-duration": "^2.1.8",
+		"seyfert": "^5.0.0",
+		"yunaforseyfert": "^1.2.3"
 	},
 	"devDependencies": {
-		"@types/node": "^26.1.1",
+		"@types/node": "^26.1.2",
 		"typescript": "^7.0.2"
 	}
 }

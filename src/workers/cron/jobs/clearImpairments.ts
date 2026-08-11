@@ -1,7 +1,7 @@
 import { CronOnCompleteCallback } from 'cron';
 import { redis } from '../../../store/index.js';
 import dayjs from 'dayjs';
-import { GagI } from '../../../common/schemas/CustomGag.js';
+import { GagI } from '../../../common/models/CustomGag.js';
 import queueMessage from '../../../common/queue.js';
 
 export default async (done: CronOnCompleteCallback) => {
