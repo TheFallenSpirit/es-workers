@@ -25,7 +25,7 @@ export default async (done: CronOnCompleteCallback) => {
             if (impairment.channelId) location = `in <#${impairment.channelId}>`;
 
             await queueMessage('general', {
-                userId: key.split(':').at(3)!,
+                userId: key.split(':')[2]!,
                 options: {
                     content: `You have been automatically un-${impairment.type === 'gag' ? 'gagged' : 'muted'} ${location}.`
                 }
