@@ -13,7 +13,16 @@ export interface ProfileI {
     limitModifiers?: LimitsModifiersI;
     permissionLevel?: number;
     disabledNotifications?: string[];
+    impairmentsConfig?: ImpairmentsConfigI;
 }
+
+interface ImpairmentsConfigI {
+    showOriginalContentOnPeekExpire?: 'guild' | 'enabled' | 'disabled';
+}
+
+const impairmentsConfigSchema = new Schema<ImpairmentsConfigI>({
+    showOriginalContentOnPeekExpire: { required: false, type: String }
+});
 
 interface LimitsModifiersI {
 	subs?: number;
@@ -44,6 +53,7 @@ const profileSchema = new Schema<ProfileI>({
     limitModifiers: { required: false, type: limitModifiersSchema },
     permissionLevel: { required: false, type: Number },
     disabledNotifications: { required: false, type: [String] },
+    impairmentsConfig: { required: false, type: impairmentsConfigSchema }
 }, { _id: false, versionKey: false });
 
 export default model('profiles', profileSchema);

@@ -7,6 +7,7 @@ import updateDiscoveryCache from './jobs/updateDiscoveryCache.js';
 import warnDueTasks from './jobs/warnDueTasks.js';
 import updateDueTasks from './jobs/updateDueTasks.js';
 import updateRepeatingTasks from './jobs/updateRepeatingTasks.js';
+import clearGagMessages from './jobs/clearGagMessages.js';
 
 validateEnv();
 extendDayjs();
@@ -61,6 +62,14 @@ CronJob.from({
     timeZone: 'Etc/UTC',
     cronTime: '0 0 * * *',
     onComplete: () => console.log('update repeating tasks')
+});
+
+CronJob.from({
+    start: true,
+    onTick: clearGagMessages,
+    cronTime: '*/1 * * * *',
+    runOnInit: true,
+    onComplete: () => console.log('Clear gag messages cron completed.')
 });
 
 console.log('Successfully started all cron jobs.');

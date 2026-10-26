@@ -9,6 +9,7 @@
 	"scripts": {
 		"dev": "pnpm run build; pm2 flush && pm2 restart ecosystem.config.cjs --env development && pm2 logs",
 		"build": "clear; rm -rf build; tsc",
+		"dev:cron": "pnpm run build; node -r dotenv/config ./build/workers/cron/index.js --dev",
 		"dev:admin": "pnpm run build; node -r dotenv/config ./build/workers/admin/index.js --dev"
 	},
 	"devEngines": {

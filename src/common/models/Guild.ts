@@ -9,6 +9,7 @@ export interface GuildI {
     color?: number;
     flags?: string[];
     premiumTier: number;
+    showOriginalContentOnPeekExpire?: boolean;
 }
 
 const guildSchema = new Schema<GuildI>({
@@ -17,6 +18,7 @@ const guildSchema = new Schema<GuildI>({
     flags: { required: false, type: [String] },
 	premiumTier: { required: true, type: Number, default: 0 },
     color: { required: false, type: Number },
+    showOriginalContentOnPeekExpire: { required: false, type: Boolean }
 }, { _id: false, versionKey: false });
 
 export default model('guilds', guildSchema);
